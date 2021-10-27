@@ -38,7 +38,7 @@ export default function Show({ show, user, setUser, setNote, setRating, isSingle
   return (
     <div className={styles.Show}>
       <div className={styles.Image_container}>
-        <a href={`${isSingle ? "" : "shows/"}${show && slugify((show?.name).replace(new RegExp(/\'|\./), ""))}`}>
+        <a href={`${isSingle ? "" : "/shows/"}${show && slugify((show?.name).replace(new RegExp(/\'|\./), ""))}`}>
           <img 
             src={show?.image?.medium || defaultImg.src} 
             style={!show?.image?.medium ? {
@@ -50,7 +50,7 @@ export default function Show({ show, user, setUser, setNote, setRating, isSingle
       </div>
       <div className={styles.Details_container}>
         <div className={styles.Details}>
-          <a href={`${isSingle ? "" : "shows/"}${show && slugify((show?.name).replace(new RegExp(/\'|\./), ""))}`}>
+          <a href={`${isSingle ? "" : "/shows/"}${show && slugify((show?.name).replace(new RegExp(/\'|\./), ""))}`}>
             {show?.name} | {show && moment(show.premiered).format("YYYY")}{show && show.ended ? ` - ${show && moment(show.ended).format("YYYY")}` : ""}
           </a>
           <p>[{show && show.genres.map((g, index) => `${g}${show && show.genres[index + 1] ? ', ' : ''}`)}] | Average episode runtime: {show && show.averageRuntime} mins.</p>
