@@ -19,7 +19,7 @@ mongoose.connect(MONGO_URI,
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(() => console.log("Connection to DB Successfull"))
+  .then(() => console.log("Connection to DB Successful"))
   .catch((err) => console.error(err))
 
 app.listen(PORT, () => {

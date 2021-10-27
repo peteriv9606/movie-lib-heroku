@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import Layout from '../../components/main/layout';
 import styles from '../../styles/shows.module.scss'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { merge } from 'lodash';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useDebounce from '../../components/main/useDebounce'
 import Show from '../../components/show';
 import { getUser } from '../../components/main/auth';
-
+import { Waypoint } from 'react-waypoint';
 
 export default function Shows() {
   const [shows, setShows] = useState()
@@ -16,7 +16,7 @@ export default function Shows() {
   const [hasMore, setHasMore] = useState(true)
   const [user, setUser] = useState()
   const debouncedSearch = useDebounce(searchTerm, 500)
-
+  const scrollTop_ref = useRef()
   const fetchData = async () => {
     const more = await fetch(process.env.apiUrl + `shows?page=${currentPage + 1}`)
       .then(res => res.json())
@@ -49,11 +49,26 @@ export default function Shows() {
     setShows(init_shows)
 
     const u = await getUser()
-    if(u && !u.message?.includes("credentials")){
+    if (u && !u.message?.includes("credentials")) {
       setUser(u)
     }
   }, [])
-  
+
+  const hideScrollTop = () => {
+    scrollTop_ref.current.classList.add(styles.Hide)
+    setTimeout(() => {
+      scrollTop_ref.current.classList.remove(styles.Hide)
+      scrollTop_ref.current.classList.remove(styles.Active)
+    }, 580);
+  }
+  const showScrollTop = () => {
+    scrollTop_ref.current.classList.add(styles.Show)
+    setTimeout(() => {
+      scrollTop_ref.current.classList.remove(styles.Show)
+      scrollTop_ref.current.classList.add(styles.Active)
+    }, 580);
+  }
+
   return (
     <Layout>
       <Head>
@@ -72,6 +87,11 @@ export default function Shows() {
               }
               placeholder={'Search by title'}
             />
+            <Waypoint
+              onEnter={hideScrollTop}
+              onLeave={showScrollTop}
+              topOffset={"-250px"}
+            />
             <div className={styles.InfiniteScroll}>
               {shows != undefined ?
                 <InfiniteScroll
@@ -79,16 +99,17 @@ export default function Shows() {
                   next={fetchData}
                   hasMore={hasMore}
                   loader={<h4>Loading...</h4>}
-                  
+
                 >
+
                   {
                     shows?.map((show, index) =>
                       <Show
-                      key={index}
-                      show={show}
-                      user={user}
-                      setUser={setUser}
-                      isSingle={false}
+                        key={index}
+                        show={show}
+                        user={user}
+                        setUser={setUser}
+                        isSingle={false}
                       />
                     )
                   }
@@ -96,6 +117,11 @@ export default function Shows() {
                 : "LOADING"}
             </div>
           </div>
+        </div>
+        <div className={styles.ScrollTop} ref={scrollTop_ref}>
+          <button 
+          onClick={() => window && window?.scrollTo({ top: 0, behavior: 'smooth' })}
+          >^</button>
         </div>
       </div>
 
