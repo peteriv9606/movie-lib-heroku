@@ -1,0 +1,52 @@
+.Inner {
+  display: flex;
+  flex-direction: column;
+  > h1 {
+    font-size: 24px;
+    font-weight: 700;
+    align-self: center;
+  }
+  >input{
+    margin: 10px auto;
+    padding: 5px 10px;
+    width: 75%;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  >input::placeholder{
+    font-weight: 400;
+  }
+  @media(min-width:768px){
+    >h1{
+      font-size: 26px;
+    } 
+    >input{
+      font-size: 16px;
+    }
+  }
+  @media(min-width:1024px){
+    >h1{
+      font-size: 28px;
+    } 
+    >input{
+      font-size: 18px;
+    }
+  }
+  @media(min-width:1440px){
+    >h1{
+      font-size: 30px;
+    } 
+    >input{
+      font-size: 20px;
+    }
+  }
+}
+
+.InfiniteScroll {
+  > div > div {
+    overflow: hidden !important;
+  }
+}
+
