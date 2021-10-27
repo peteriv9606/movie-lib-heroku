@@ -38,20 +38,28 @@ app.use('/api/favourites', favourites)
 
 
 
-
-
-
-// Accessing the path module
+// return static
 const path = require("path");
 
-//Stuff from tutorials to try to connect to heroku
-// Step 1:
+app.use(express.static(path.resolve(__dirname, './frontend/out/')))
 
-app.use(express.static(path.resolve(__dirname, "./frontend/out/")));
-// Step 2:
-app.get("*", function (request, response) {
-  console.log("SERVER REQUEST FROM FRONTEND *");
-  response.sendFile(path.resolve(__dirname, "./frontend/out/", "index.html"));
+app.get('/', (req,res) => {
+  res.sendFile(path.join(__dirname, './frontend/out/index.html'));
+});
+app.get('/shows', (req,res) => {
+  res.sendFile(path.join(__dirname, './frontend/out/shows.html'));
+});
+app.get('/shows/:slug', (req,res) => {
+  res.sendFile(path.join(__dirname, './frontend/out/shows/[slug].html'));
+});
+app.get('/favourites', (req,res) => {
+  res.sendFile(path.join(__dirname, './frontend/out/favourites.html'));
+});
+app.get('/login', (req,res) => {
+  res.sendFile(path.join(__dirname, './frontend/out/login.html'));
+});
+app.get('/register', (req,res) => {
+  res.sendFile(path.join(__dirname, './frontend/out/register.html'));
 });
 
 
