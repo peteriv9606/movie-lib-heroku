@@ -13,7 +13,7 @@ export default function Show({ show, user, setUser, setNote, setRating, isSingle
         body: JSON.stringify({ user_id: user._id, show_id: show.id })
       }).then(res => res.json())
       setUser(resp)
-      toast.success(`Successfuly added ${show?.name} to your favorites!`)
+      toast.success(`Successfully added ${show?.name} to your favorites!`)
     }
     else {
       toast.error("Please, log in to add this show to your favorites!")
@@ -28,7 +28,7 @@ export default function Show({ show, user, setUser, setNote, setRating, isSingle
     setUser(resp)
     isSingle && setNote('')
     isSingle && setRating(0)
-    toast.success(`Successfuly removed '${show?.name}' from your favorites!`)
+    toast.success(`Successfully removed '${show?.name}' from your favorites!`)
     }
     else{
       toast.error("Unauthorized action!")

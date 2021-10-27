@@ -34,7 +34,20 @@
       color: #fff;
     }
   }
-  > button {
+  > button.Username{
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #aaa;
+    border: none;
+    background-color: transparent;
+    transition: 0.3s;
+  }
+  > button.Username:hover {
+    color: #000;
+    transition: 0.3s;
+  }
+  > button.Hamburger {
     // menu btn
     display: flex;
     flex-direction: column;
@@ -51,7 +64,7 @@
       transition: 0.6s;
     }
   }
-  > button:hover {
+  > button.Hamburger:hover {
     > span {
       transition: 0.6s;
       background-color: #aaa;
