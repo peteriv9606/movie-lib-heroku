@@ -19,8 +19,10 @@
   "scripts": {
     "dev": "nodemon server.js",
     "install-all": "yarn install && cd frontend && yarn install",
+    "install-frontend" : "cd frontend && yarn install",
     "build": "cd frontend && yarn build",
-    "start": "concurrently --kill-others-on-fail \"cd frontend && yarn start\" \"yarn dev\""
+    "heroku-postbuild": "npm run install-frontend && npm run build",
+    "start": "concurrently --kill-others-on-fail \"yarn build\" \"nodemon server.js\""
   },
   "devDependencies": {
     "eslint": "^8.1.0"
