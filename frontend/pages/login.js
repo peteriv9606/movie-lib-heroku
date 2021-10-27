@@ -5,6 +5,7 @@ import Layout from "../components/main/layout"
 import { useState, useEffect, useRef } from "react"
 import Cookies from "js-cookie";
 import Loader from "../components/main/loader"
+import { toast } from 'react-toastify'
 
 export default function Login() {
 
@@ -70,6 +71,7 @@ export default function Login() {
                 // all good - fetch token
                 const resp = await res.json()
                 setIsLoading(false)
+                toast.success("Login Successful!")
                 Cookies.set('access', resp.access)
                 Cookies.set('refresh', resp.refresh)
                 /* if (window.history.length > 1 && document.referrer.indexOf(window.location.host) !== -1) {

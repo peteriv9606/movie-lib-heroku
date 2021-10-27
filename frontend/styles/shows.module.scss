@@ -1,6 +1,11 @@
+.Wrapper {
+  position:relative;
+}
+
 .Inner {
   display: flex;
   flex-direction: column;
+  position: relative;
   > h1 {
     font-size: 24px;
     font-weight: 700;
@@ -50,3 +55,62 @@
   }
 }
 
+.ScrollTop {
+  position: fixed;
+  top: calc(100vh);
+  right: 50px;
+
+  >button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: 0.3s;
+    padding: 10px 12px 3px;
+    border-radius: 50%;
+    line-height: 1;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #ff9800;
+  }
+
+  >button:hover{
+    opacity: 1;
+    transition: 0.3s;
+  }
+}
+.Active {
+  transform: translateY(-300%);
+
+}
+.Hide {
+  animation: hide ease-in-out 0.6s;
+}
+.Show {
+  animation: show ease-in-out 0.6s;
+}
+
+@keyframes hide {
+  0% {
+    transform: translateY(-300%);
+  }
+  30% {
+    transform: translateY(-350%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes show {
+  0%{
+    transform: translateY(0)
+  }
+  70% {
+    transform: translateY(-350%);
+  }
+  100%{
+    transform: translateY(-300%)
+  }
+}

@@ -59,9 +59,6 @@ function Header() {
           dropdown_ref.current.classList.add(styles.Active)
         }, 500);
       }
-      return () => {
-        dropdown_ref.current.classList.remove(styles.Active)
-      }
     }
     setInitRender(false)
 
@@ -75,49 +72,55 @@ function Header() {
         <div className="Shell">
           <div className={styles.Inner}>
             <a href="/">M-Lib.</a>
-            <button onClick={handleDropdown}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+            {!user ?
+              <button onClick={handleDropdown} className={styles.Hamburger}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+              : <button onClick={handleDropdown} className={styles.Username}>{user}</button>
+            }
           </div>
         </div>
         <div className={`${styles.Dropdown_wrapper}`} ref={dropdown_ref}>
           <div className={"Shell"}>
             <div className={styles.Dropdown}>
-              <p>{user? `Hello, ${user}!` : ""}</p>
+              {/* 
+                // possible future user notifications
+                <p>{user ? `Hello, ${user}!` : ""}</p> 
+              */}
               <div className={styles.LinkContainer}>
-              <div>
-                {/* left side */}
-                {
-                  user != undefined ?
-                    <>
-                      <a href={`/shows`} onClick={() => setDropdown(false)}>Shows</a>
-                      <a href={`/favourites`} onClick={() => setDropdown(false)}>Favourites</a>
-                    </>
-                    :
-                    <>
-                      <a href={`/shows`} onClick={() => setDropdown(false)}>Shows</a>
-                    </>
-                }
-              </div>
-              <div>
-                {/* right side */}
-                {
-                  user != undefined ?
-                    <>
-                      <button onClick={handleLogout}>Logout</button>
-                    </>
-                    :
-                    <>
-                      <a href="/login" onClick={() => setDropdown(false)}>Login</a>
-                      <a href="/register" onClick={() => setDropdown(false)}>Register</a>
-                    </>
-                }
+                <div>
+                  {/* left side */}
+                  {
+                    user != undefined ?
+                      <>
+                        <a href={`/shows`} onClick={() => setDropdown(false)}>Shows</a>
+                        <a href={`/favourites`} onClick={() => setDropdown(false)}>Favourites</a>
+                      </>
+                      :
+                      <>
+                        <a href={`/shows`} onClick={() => setDropdown(false)}>Shows</a>
+                      </>
+                  }
+                </div>
+                <div>
+                  {/* right side */}
+                  {
+                    user != undefined ?
+                      <>
+                        <button onClick={handleLogout}>Logout</button>
+                      </>
+                      :
+                      <>
+                        <a href="/login" onClick={() => setDropdown(false)}>Login</a>
+                        <a href="/register" onClick={() => setDropdown(false)}>Register</a>
+                      </>
+                  }
+                </div>
               </div>
             </div>
-            </div>
-            
+
           </div>
         </div>
       </OutsideClickHandler>
